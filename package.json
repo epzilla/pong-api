@@ -1,0 +1,36 @@
+{
+  "name": "pong-api",
+  "version": "1.0.0",
+  "description": "API for real-time ping pong stat tracker app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "debug": "nodemon -e js --inspect --watch models --watch routes --watch modelAssociations.js --watch index.js --watch constants.js --watch helpers.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Epling",
+  "license": "MIT",
+  "eslintConfig": {
+    "extends": "eslint-config-synacor"
+  },
+  "eslintIgnore": [
+    "build/*"
+  ],
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-synacor": "^3.0.5",
+    "if-env": "^1.0.4",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chalk": "^4.1.2",
+    "date-fns": "^2.23.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.0",
+    "sequelize": "^4.28.6",
+    "ws": "^8.0.0"
+  }
+}
