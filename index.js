@@ -84,7 +84,7 @@ const registerForSocketMsgs = (type, cb) => {
 require('./routes')(models, app, database, sendSocketMsg, registerForSocketMsgs);
 
 // Create database and listen
-server.listen(3003, () => {
+server.listen(process.env.PORT || 3003, () => {
   const addr = server.address();
   console.log(`listening at ${addr.address}:${addr.port}`);
   database.sync();
