@@ -9,6 +9,7 @@ let sendSocketMsg;
 const validateMatchToken = (req, res) => {
   const deviceId = req.body.deviceId || req.params.deviceId;
   if (!deviceId) {
+    console.log(`[validateMatchToken] No device ID passed in`);
     return Promise.reject(constants.DEVICE_CANNOT_UPDATE_MATCH);
   }
   const hash = crypto.createHash('sha256');
@@ -17,6 +18,8 @@ const validateMatchToken = (req, res) => {
   return sequelize
     .query(`select match_id from match_key where id = '${hashedToken}'`)
     .then(result => {
+      console.log(`[validateMatchToken] SQL statement succeeded. Output:`);
+      console.dir(result);
       return result.length > 0 && result[0].length > 0;
     });
 };
