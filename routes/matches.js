@@ -112,10 +112,10 @@ exports.create = (req, res) => {
         );
       } else {
         Matches.create({
-          player1Id: matchInfo.player1.id,
-          player2Id: matchInfo.player2.id,
-          partner1Id: matchInfo.partner1 ? matchInfo.partner1.id : null,
-          partner2Id: matchInfo.partner2 ? matchInfo.partner2.id : null,
+          player1Id: matchInfo.player1Id,
+          player2Id: matchInfo.player2Id,
+          partner1Id: matchInfo.partner1Id || null,
+          partner2Id: matchInfo.partner2Id || null,
           doubles: matchInfo.doubles,
           updateEveryPoint: matchInfo.updateEveryPoint,
           bestOf: matchInfo.bestOf || 4,
