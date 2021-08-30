@@ -15,6 +15,7 @@ const validateMatchToken = (req, res) => {
   const hash = crypto.createHash('sha256');
   hash.update('01a217ea-67bf-' + deviceId + '411a-965e-3e874e15e490');
   const hashedToken = hash.digest('hex');
+  console.log(`[validateMatchToken] Token: ${hashedToken}`);
   return sequelize
     .query(`select match_id from match_key where id = '${hashedToken}'`)
     .then(result => {
