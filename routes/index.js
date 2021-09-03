@@ -30,6 +30,7 @@ module.exports = function (models, app, sequelize, sendSocketMsg, registerForMsg
 
   // Stats
   app.get('/stats/head-to-head/:player1Id/:player2Id', stats.matchesByPlayers);
+  app.get('/stats/by-player/:id', stats.matchesByPlayer);
 
   app.get('/*', (req, res) => res.render('index'));
 };

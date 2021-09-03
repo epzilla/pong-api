@@ -216,3 +216,16 @@ exports.matchesByPlayers = (req, res) => {
     })
     .catch(err => res.status(500).send(err));
 };
+
+exports.matchesByPlayer = (req, res) => {
+  const id = parseInt(req.params.id);
+  return Matches.findAll({
+    where: {
+      [Op.or]: [{ player1Id: id }, { player2Id: id }, { partner1Id: id }, { partner2Id: id }]
+    }
+  })
+    .then(matches => {
+      res.json(matches);
+    })
+    .catch(err => res.status(500).send(err));
+};
