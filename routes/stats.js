@@ -220,6 +220,11 @@ exports.matchesByPlayers = (req, res) => {
 exports.matchesByPlayer = (req, res) => {
   const id = parseInt(req.params.id);
   return Matches.findAll({
+    order: [
+      ['startTime', 'DESC'],
+      [{ model: Games, as: 'games' }, 'gameNum', 'ASC']
+    ],
+    include: [{ all: true }],
     where: {
       [Op.or]: [{ player1Id: id }, { player2Id: id }, { partner1Id: id }, { partner2Id: id }]
     }
