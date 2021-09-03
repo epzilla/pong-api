@@ -234,3 +234,36 @@ exports.matchesByPlayer = (req, res) => {
     })
     .catch(err => res.status(500).send(err));
 };
+
+exports.matchesByTeam = (req, res) => {
+  const ids = req.params.id.split('-');
+  const p1 = parseInt(ids[0]);
+  const p2 = parseInt(ids[1]);
+  return Matches.findAll({
+    order: [
+      ['startTime', 'DESC'],
+      [{ model: Games, as: 'games' }, 'gameNum', 'ASC']
+    ],
+    include: [{ all: true }],
+    where: {
+      [Op.or]: [
+        {
+          [Op.and]: [{ player1Id: p1 }, { partner1Id: p2 }]
+        },
+        {
+          [Op.and]: [{ player1Id: p2 }, { partner1Id: p1 }]
+        },
+        {
+          [Op.and]: [{ player2Id: p1 }, { partner2Id: p2 }]
+        },
+        {
+          [Op.and]: [{ player2Id: p2 }, { partner2Id: p1 }]
+        }
+      ]
+    }
+  })
+    .then(matches => {
+      res.json(matches);
+    })
+    .catch(err => res.status(500).send(err));
+};
